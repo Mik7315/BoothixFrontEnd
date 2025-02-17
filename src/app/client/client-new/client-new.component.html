@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-4 col-4" [formGroup]="formGroup" >
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Téléphone</mat-label>
+        <input matInput formControlName="phoneNumber" />
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Rue</mat-label>
+        <input matInput formControlName="street" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Numéro</mat-label>
+        <input matInput formControlName="houseNumber" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Boite</mat-label>
+        <input matInput formControlName="box" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Code postal</mat-label>
+        <input matInput formControlName="zipCode" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ville</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Pays</mat-label>
+        <input matInput formControlName="country" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+    </div>
+  </div>
+</div>
