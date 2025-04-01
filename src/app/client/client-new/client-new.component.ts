@@ -1,5 +1,9 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {ClientServiceService} from "../../services/client-service.service";
+import {Client} from "../../model/client";
+import {Address} from "../../model/address";
+import {ClientTypeEnum} from "../../model/client-type-enum";
 
 @Component({
   selector: 'app-client-new',
@@ -7,7 +11,9 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./client-new.component.scss']
 })
 export class ClientNewComponent {
+  private clientServiceService = inject(ClientServiceService);
   private formBuilder = inject(FormBuilder);
+
   formGroup = this.formBuilder.group({
     name: new FormControl(''),
     firstName: new FormControl(''),
@@ -33,9 +39,22 @@ export class ClientNewComponent {
     const city = this.formGroup.controls.city.value;
     const country = this.formGroup.controls.country.value;
 
-    console.log(name);
-    console.log(firstName);
-    console.log(phoneNumber);
-    console.log(email);
+    let client = new Client({
+      type: ClientTypeEnum.PRIVATE,
+      firstName: firstName,
+      lastName: name,
+      phoneNumber: phoneNumber,
+      email: email,
+      address: new Address({
+        street: street,
+        houseNumber: houseNumber,
+        box: box,
+        city: city,
+        zipCode: zipCode,
+        country: country
+      })
+    })
+
+    this.clientServiceService.createClient(client).subscribe();
   }
 }
