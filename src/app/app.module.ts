@@ -13,12 +13,16 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import { DeviceComponent } from './device/device.component';
+import { DeviceNewComponent } from './device/device-new/device-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientComponent,
-    ClientNewComponent
+    ClientNewComponent,
+    DeviceComponent,
+    DeviceNewComponent
   ],
   imports: [
     BrowserModule,

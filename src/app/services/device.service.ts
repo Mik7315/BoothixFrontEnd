@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Device} from "../model/device";
+import {Observable} from "rxjs";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DeviceService {
+  private devicePath: string;
+
+  constructor(private http: HttpClient) {
+    this.devicePath = 'http://localhost:8080/api/device';
+  }
+
+  createDevice(device: Device) : Observable<any> {
+    return this.http.post(this.devicePath, device);
+  }
+}

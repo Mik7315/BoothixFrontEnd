@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-4 col-4" [formGroup]="formGroup" >
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+    </div>
+  </div>
+</div>
