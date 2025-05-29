@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
-import {ClientNewComponent} from "./client/client-new/client-new.component";
+import { ClientNewComponent } from "./client/client-new/client-new.component";
+import { HomeComponent } from "./home/home.component";
 import {DeviceNewComponent} from "./device/device-new/device-new.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    component: HomeComponent
   },
   {
     path: 'client',
