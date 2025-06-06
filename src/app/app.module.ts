@@ -16,6 +16,9 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { DeviceComponent } from './device/device.component';
 import { DeviceNewComponent } from './device/device-new/device-new.component';
+import { FormulaComponent } from './formula/formula.component';
+import { FormulaNewComponent } from './formula/formula-new/formula-new.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { DeviceNewComponent } from './device/device-new/device-new.component';
     HomeComponent,
     MenuComponent,
     DeviceComponent,
-    DeviceNewComponent
+    DeviceNewComponent,
+    FormulaComponent,
+    FormulaNewComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { DeviceNewComponent } from './device/device-new/device-new.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,7 +20,10 @@ import { Component } from '@angular/core';
             <a class="p-3 fs-3 nav-link" routerLinkActive="active" aria-current="page" routerLink="/client">Clients</a>
           </li>
           <li class="nav-item">
-            <a class="p-3 fs-3 nav-link" routerLinkActive="active" routerLink="#">Appareils</a>
+            <a class="p-3 fs-3 nav-link" routerLinkActive="active" routerLink="/device">Appareils</a>
+          </li>
+          <li class="nav-item">
+            <a class="p-3 fs-3 nav-link" routerLinkActive="active" routerLink="/formula">Formules</a>
           </li>
         </ul>
       </div>

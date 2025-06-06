@@ -1,10 +1,9 @@
-import {DeviceTypeEnum} from "./device-type-enum";
-
-export class Device {
-  idDevice?: number;
+export class Formula {
+  idFormula?: number;
   name?: string;
   description?: string;
-  type?: DeviceTypeEnum;
+  price?: number;
+  idDevice?: number
 
   constructor(obj?: any) {
     if (!obj){

@@ -4,6 +4,9 @@ import { ClientComponent } from './client/client.component';
 import { ClientNewComponent } from "./client/client-new/client-new.component";
 import { HomeComponent } from "./home/home.component";
 import {DeviceNewComponent} from "./device/device-new/device-new.component";
+import {DeviceComponent} from "./device/device.component";
+import {FormulaComponent} from "./formula/formula.component";
+import {FormulaNewComponent} from "./formula/formula-new/formula-new.component";
 
 const routes: Routes = [
   {
@@ -19,8 +22,20 @@ const routes: Routes = [
     component: ClientNewComponent
   },
   {
+    path: 'device',
+    component: DeviceComponent
+  },
+  {
     path: 'device/new',
     component: DeviceNewComponent
+  },
+  {
+    path: 'formula',
+    component: FormulaComponent
+  },
+  {
+    path: 'formula/new',
+    component: FormulaNewComponent
   }
 ];
 
