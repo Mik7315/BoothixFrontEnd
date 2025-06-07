@@ -18,7 +18,9 @@ import { DeviceComponent } from './device/device.component';
 import { DeviceNewComponent } from './device/device-new/device-new.component';
 import { FormulaComponent } from './formula/formula.component';
 import { FormulaNewComponent } from './formula/formula-new/formula-new.component';
-import {MatSelectModule} from "@angular/material/select";
+import { MatSelectModule } from "@angular/material/select";
+import { OptionComponent } from "./option/option.component";
+import { OptionNewComponent } from "./option/option-new/option-new.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {MatSelectModule} from "@angular/material/select";
     DeviceComponent,
     DeviceNewComponent,
     FormulaComponent,
-    FormulaNewComponent
+    FormulaNewComponent,
+    OptionComponent,
+    OptionNewComponent
   ],
   imports: [
     BrowserModule,
