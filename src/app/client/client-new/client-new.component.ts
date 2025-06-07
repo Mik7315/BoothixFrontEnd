@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {ClientServiceService} from "../../services/client-service.service";
+import {ClientService} from "../../services/client.service";
 import {Client} from "../../model/client";
 import {Address} from "../../model/address";
 import {ClientTypeEnum} from "../../model/client-type-enum";
@@ -11,7 +11,7 @@ import {ClientTypeEnum} from "../../model/client-type-enum";
   styleUrls: ['./client-new.component.scss']
 })
 export class ClientNewComponent {
-  private clientServiceService = inject(ClientServiceService);
+  private clientServiceService = inject(ClientService);
   private formBuilder = inject(FormBuilder);
 
   formGroup = this.formBuilder.group({

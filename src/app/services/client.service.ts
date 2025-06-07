@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class ClientServiceService {
+export class ClientService {
   private clientPath: string;
 
   constructor(private http: HttpClient) {
@@ -15,5 +15,9 @@ export class ClientServiceService {
 
   createClient(client: Client) : Observable<any> {
     return this.http.post(this.clientPath,client);
+  }
+
+  getAll(): Observable<Client[]> {
+    return this.http.get<Array<Client>>(this.clientPath);
   }
 }
