@@ -9,7 +9,7 @@ import {Client} from "../model/client";
 })
 export class ClientComponent implements OnInit {
   private clientService = inject(ClientService)
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'more'];
   clients: Client[] = [];
 
   ngOnInit() {
@@ -20,5 +20,9 @@ export class ClientComponent implements OnInit {
     this.clientService.getAll().subscribe(x => {
       this.clients = x;
     })
+  }
+  deleteClient(clientToDelete: Client) {
+    console.log(clientToDelete);
+    //Modifier un champ en DB en supprimer
   }
 }

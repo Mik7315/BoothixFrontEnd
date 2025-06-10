@@ -14,10 +14,18 @@ export class ClientService {
   }
 
   createClient(client: Client) : Observable<any> {
-    return this.http.post(this.clientPath,client);
+    return this.http.post(this.clientPath, client);
+  }
+
+  updateClient(client: Client): Observable<any> {
+    return this.http.put(this.clientPath, client);
   }
 
   getAll(): Observable<Client[]> {
     return this.http.get<Array<Client>>(this.clientPath);
+  }
+
+  getById(id: Number) : Observable<Client> {
+    return this.http.get(`${this.clientPath}/${id}`);
   }
 }

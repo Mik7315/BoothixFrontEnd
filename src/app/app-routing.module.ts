@@ -9,6 +9,7 @@ import { FormulaComponent } from "./formula/formula.component";
 import { FormulaNewComponent } from "./formula/formula-new/formula-new.component";
 import { OptionComponent } from "./option/option.component";
 import { OptionNewComponent } from "./option/option-new/option-new.component";
+import { clientResolver } from "./resolver/client.resolver";
 
 const routes: Routes = [
   {
@@ -22,6 +23,13 @@ const routes: Routes = [
   {
     path: 'client/new',
     component: ClientNewComponent
+  },
+  {
+    path: 'client/:idClient',
+    component: ClientNewComponent,
+    resolve: {
+      client: clientResolver
+    }
   },
   {
     path: 'device',

@@ -1,5 +1,10 @@
 <div class="container">
   <div class="row">
+    <div class="add-button-container">
+      <button mat-raised-button  routerLink="/client/new">
+        <mat-icon>add</mat-icon> Ajouter un client
+      </button>
+    </div>
 
     <table mat-table [dataSource]="clients">
       <ng-container matColumnDef="id">
@@ -12,6 +17,24 @@
         <td mat-cell *matCellDef="let client"> {{client.firstName}} {{client.lastName}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="more">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions"></th>
+        <td mat-cell *matCellDef="let client">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLinkActive="active" [routerLink]="['/client', client.idClient]">
+              <mat-icon>info</mat-icon>
+              <span>Consulter</span>
+            </button>
+            <button mat-menu-item (click)="deleteClient(client)">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

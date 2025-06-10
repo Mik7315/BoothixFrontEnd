@@ -21,6 +21,8 @@ import { FormulaNewComponent } from './formula/formula-new/formula-new.component
 import { MatSelectModule } from "@angular/material/select";
 import { OptionComponent } from "./option/option.component";
 import { OptionNewComponent } from "./option/option-new/option-new.component";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { OptionNewComponent } from "./option/option-new/option-new.component";
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@
     <div class="offset-4 col-4" [formGroup]="formGroup" >
       <mat-form-field>
         <mat-label>Nom</mat-label>
-        <input matInput formControlName="name" />
+        <input matInput formControlName="lastName" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Prénom</mat-label>
@@ -42,7 +42,7 @@
         <mat-label>Pays</mat-label>
         <input matInput formControlName="country" />
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+      <button mat-flat-button color="primary" (click)="save()">{{ !!client ? 'Mettre à jour' : 'Enregistrer' }}</button>
     </div>
   </div>
 </div>
