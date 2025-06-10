@@ -21,9 +21,18 @@ export class ClientNewComponent implements OnInit{
 
   client?: Client;
 
+  clientTypes = [
+    { value: ClientTypeEnum.PRIVATE, viewValue: 'Privé' },
+    { value: ClientTypeEnum.BUSINESS, viewValue: 'Professionnel' }
+  ];
+
   formGroup = this.formBuilder.group({
+    type: new FormControl(ClientTypeEnum.PRIVATE),
     lastName: new FormControl(''),
     firstName: new FormControl(''),
+    denomination: new FormControl(''),
+    vatNumber: new FormControl(''),
+    bceNumber: new FormControl(''),
     phoneNumber: new FormControl(''),
     email: new FormControl(''),
     street: new FormControl(''),
@@ -39,8 +48,12 @@ export class ClientNewComponent implements OnInit{
 
     if (!!this.client) {
       this.formGroup.patchValue({
+        type: this.client.type,
         firstName: this.client.firstName,
         lastName: this.client.lastName,
+        denomination: this.client.denomination,
+        vatNumber: this.client.vatNumber,
+        bceNumber: this.client.bceNumber,
         phoneNumber: this.client.phoneNumber,
         email: this.client.email,
         street: this.client.address?.street,
@@ -51,6 +64,16 @@ export class ClientNewComponent implements OnInit{
         country: this.client.address?.country
       });
     }
+
+    this.formGroup.get('type')?.valueChanges.subscribe(type => {
+      if (type === ClientTypeEnum.PRIVATE) {
+        this.formGroup.patchValue({
+          denomination: '',
+          vatNumber: '',
+          bceNumber: ''
+        });
+      }
+    })
   }
 
   save(){
@@ -58,9 +81,12 @@ export class ClientNewComponent implements OnInit{
 
     let client = new Client({
       idClient: this.client?.idClient,
-      type: ClientTypeEnum.PRIVATE,
+      type: values.type as ClientTypeEnum,
       firstName: values.firstName,
       lastName: values.lastName,
+      denomination: values.denomination,
+      vatNumber: values.vatNumber,
+      bceNumber: values.bceNumber,
       phoneNumber: values.phoneNumber,
       email: values.email,
       address: new Address({
@@ -73,7 +99,7 @@ export class ClientNewComponent implements OnInit{
       })
     })
 
-    if (!!client) {
+    if (this.client?.idClient) {
       this.clientService.updateClient(client).subscribe({
         next: value => {
           this.router.navigate(['client']);

@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="offset-4 col-4" [formGroup]="formGroup" >
+      <mat-form-field appearance="fill">
+        <mat-label>Choisir un type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let typeOption of clientTypes" [value]="typeOption.value">
+            {{ typeOption.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-form-field>
         <mat-label>Nom</mat-label>
         <input matInput formControlName="lastName" />
@@ -9,6 +17,20 @@
         <mat-label>Prénom</mat-label>
         <input matInput formControlName="firstName" />
       </mat-form-field>
+      <ng-container *ngIf="formGroup.value.type === clientTypes[1].value">
+        <mat-form-field>
+          <mat-label>Dénomination</mat-label>
+          <input matInput formControlName="denomination" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Numéro de TVA</mat-label>
+          <input matInput formControlName="vatNumber" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Numéro d'entreprise</mat-label>
+          <input matInput formControlName="bceNumber" />
+        </mat-form-field>
+      </ng-container>
       <mat-form-field>
         <mat-label>Téléphone</mat-label>
         <input matInput formControlName="phoneNumber" />
