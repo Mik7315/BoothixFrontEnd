@@ -8,9 +8,8 @@ import {Formula} from "../model/formula";
   styleUrls: ['./formula.component.scss']
 })
 export class FormulaComponent implements OnInit{
-
   private formulaService = inject(FormulaService);
-  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
+  displayedColumns: string[] = ['id', 'name', 'price','more'];
   formulas: Formula[] = [];
 
   ngOnInit() {
@@ -21,5 +20,10 @@ export class FormulaComponent implements OnInit{
     this.formulaService.getAll().subscribe(x => {
       this.formulas = x;
     });
+  }
+
+  deleteFormula(formulaToDelete: Formula) {
+    console.log(formulaToDelete);
+    //Modifier un champ en DB en supprimer
   }
 }

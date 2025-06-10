@@ -36,7 +36,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     FormulaComponent,
     FormulaNewComponent,
     OptionComponent,
-    OptionNewComponent
+    OptionNewComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,11 @@
 <div class="container">
   <div class="row">
+
+    <div class="p-3 text-center">
+      <h1 *ngIf="!!formula">Formule {{ formula.name }}</h1>
+      <h1 *ngIf="!formula">Création d'une nouvelle formule</h1>
+    </div>
+
     <div class="offset-4 col-4" [formGroup]="formGroup" >
       <mat-form-field>
         <mat-label>Nom</mat-label>
@@ -21,7 +27,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+      <button mat-flat-button color="primary" (click)="save()">{{ !!formula ? 'Mettre à jour' : 'Enregistrer' }}</button>
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { OptionComponent } from "./option/option.component";
 import { OptionNewComponent } from "./option/option-new/option-new.component";
 import { clientResolver } from "./resolver/client.resolver";
 import { deviceResolver } from "./resolver/device.resolver";
+import { formulaResolver } from "./resolver/formula.resolver";
 
 const routes: Routes = [
   {
@@ -54,6 +55,13 @@ const routes: Routes = [
   {
     path: 'formula/new',
     component: FormulaNewComponent
+  },
+  {
+    path: 'formula/:idFormula',
+    component: FormulaNewComponent,
+    resolve: {
+      formula: formulaResolver,
+    }
   },
   {
     path: 'option',

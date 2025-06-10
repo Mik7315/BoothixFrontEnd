@@ -17,7 +17,15 @@ export class FormulaService {
     return this.http.post(this.formulaPath, formula);
   }
 
+  updateFormula(formula: Formula): Observable<any> {
+    return this.http.put(this.formulaPath, formula);
+  }
+
   getAll(): Observable<Formula[]> {
     return this.http.get<Array<Formula>>(this.formulaPath);
+  }
+
+  getById(id: Number) : Observable<Formula> {
+    return this.http.get(`${this.formulaPath}/${id}`);
   }
 }
