@@ -10,6 +10,7 @@ import { FormulaNewComponent } from "./formula/formula-new/formula-new.component
 import { OptionComponent } from "./option/option.component";
 import { OptionNewComponent } from "./option/option-new/option-new.component";
 import { clientResolver } from "./resolver/client.resolver";
+import { deviceResolver } from "./resolver/device.resolver";
 
 const routes: Routes = [
   {
@@ -38,6 +39,13 @@ const routes: Routes = [
   {
     path: 'device/new',
     component: DeviceNewComponent
+  },
+  {
+    path: 'device/:idDevice',
+    component: DeviceNewComponent,
+    resolve: {
+      device: deviceResolver
+    }
   },
   {
     path: 'formula',

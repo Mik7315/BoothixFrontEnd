@@ -1,17 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { DeviceService } from "../services/device.service";
+import { Device } from "../model/device";
 
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss']
 })
-export class DeviceComponent {
-  displayedColumns: string[] = ['id', 'name', 'description'];
-  dataSource = [
-    { id: 1, name: 'photo', description: 'petit' },
-    { id: 2, name: 'miroir', description: 'moyen' },
-    { id: 3, name: 'photo2', description: 'grand' },
-    { id: 4, name: '360', description: 'grand' },
-    { id: 5, name: 'audio', description: 'petit' }
-  ];
+export class DeviceComponent implements OnInit {
+  private deviceServcie= inject(DeviceService)
+  displayedColumns: string[] = ['id', 'name', 'more'];
+  devices: Device[] = [];
+
+  ngOnInit() {
+    this.getAllDevices();
+  }
+
+  getAllDevices() {
+    this.deviceServcie.getAll().subscribe(x => {
+      this.devices = x;
+    })
+  }
+
+  deleteDevice(deviceToDelete: Device) {
+    console.log(deviceToDelete);
+    //Modifier un champ en DB en supprimer
+  }
 }
