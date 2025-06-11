@@ -12,6 +12,7 @@ import { OptionNewComponent } from "./option/option-new/option-new.component";
 import { clientResolver } from "./resolver/client.resolver";
 import { deviceResolver } from "./resolver/device.resolver";
 import { formulaResolver } from "./resolver/formula.resolver";
+import { optionResolver } from "./resolver/option.resolver";
 
 const routes: Routes = [
   {
@@ -70,6 +71,13 @@ const routes: Routes = [
   {
     path: 'option/new',
     component: OptionNewComponent
+  },
+  {
+    path: 'option/:idOption',
+    component: OptionNewComponent,
+    resolve: {
+      option: optionResolver
+    }
   }
 ];
 

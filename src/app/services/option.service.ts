@@ -18,7 +18,15 @@ export class OptionService {
     return this.http.post(this.optionPath, option);
   }
 
+  updateOption(option: Option) : Observable<any> {
+    return this.http.put(this.optionPath, option);
+  }
+
   getAll(): Observable<Option[]> {
     return this.http.get<Array<Option>>(this.optionPath);
+  }
+
+  getById(id: Number) : Observable<any> {
+    return this.http.get(`${this.optionPath}/${id}`);
   }
 }

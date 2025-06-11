@@ -2,7 +2,8 @@ import {Component, inject, OnInit} from '@angular/core';
 import {OptionService} from "../../services/option.service";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {Option} from "../../model/option";
-import {OptionComponent} from "../option.component";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-option-new',
@@ -12,36 +13,65 @@ import {OptionComponent} from "../option.component";
 export class OptionNewComponent implements OnInit{
   private optionService = inject(OptionService);
   private formBuilder = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
-  options: Option[] = [];
+  option?: Option;
 
   formGroup = this.formBuilder.group({
     name: new FormControl(''),
     description: new FormControl(''),
-    price: new FormControl('')
+    price: new FormControl<Number | null>(null)
   });
 
   ngOnInit() {
-    this.getAllOptions();
+    this.option = this.route.snapshot.data['option'];
+    if (!!this.option) {
+      this.formGroup.patchValue({
+        name: this.option.name,
+        description: this.option.description,
+        price: this.option.price
+      });
+    }
   }
 
   save(){
-    const name = this.formGroup.controls.name.value;
-    const description = this.formGroup.controls.description.value;
-    const price = this.formGroup.controls.price.value;
+    const values = this.formGroup.value;
 
     let option = new Option({
-      name: name,
-      description: description,
-      price: price
+      idOption: this.option?.idOption,
+      name: values.name,
+      description: values.description,
+      price: values.price
     })
 
-    this.optionService.createOption(option).subscribe();
-  }
-
-  getAllOptions(){
-    this.optionService.getAll().subscribe(x => {
-      this.options = x;
-    });
+    if (this.option?.idOption) {
+      this.optionService.updateOption(option).subscribe({
+        next: value => {
+          this.router.navigate(['option']);
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    } else {
+      this.optionService.createOption(option).subscribe({
+        next: value => {
+          this.router.navigate(['option']);
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      });
+    }
   }
 }

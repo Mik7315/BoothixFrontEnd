@@ -8,7 +8,7 @@ import { Device } from "../model/device";
   styleUrls: ['./device.component.scss']
 })
 export class DeviceComponent implements OnInit {
-  private deviceServcie= inject(DeviceService)
+  private deviceService= inject(DeviceService)
   displayedColumns: string[] = ['id', 'name', 'more'];
   devices: Device[] = [];
 
@@ -17,7 +17,7 @@ export class DeviceComponent implements OnInit {
   }
 
   getAllDevices() {
-    this.deviceServcie.getAll().subscribe(x => {
+    this.deviceService.getAll().subscribe(x => {
       this.devices = x;
     })
   }

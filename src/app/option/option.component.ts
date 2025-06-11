@@ -9,7 +9,7 @@ import { Option } from "../model/option";
 })
 export class OptionComponent implements OnInit {
   private optionService = inject(OptionService);
-  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'more'];
   options: Option[] = [];
 
   ngOnInit() {
@@ -20,5 +20,10 @@ export class OptionComponent implements OnInit {
     this.optionService.getAll().subscribe(x => {
       this.options = x;
     });
+  }
+
+  deleteOption(optionToDelete: Option) {
+    console.log(optionToDelete);
+    //Modifier un champ en DB en supprimer
   }
 }

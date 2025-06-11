@@ -13,7 +13,7 @@
         <mat-label>Prix</mat-label>
         <input matInput formControlName="price" />
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+      <button mat-flat-button color="primary" (click)="save()">{{ !!option ? 'Mettre à jour' : 'Enregistrer' }}</button>
     </div>
   </div>
 </div>

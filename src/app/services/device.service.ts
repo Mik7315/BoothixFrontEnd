@@ -18,7 +18,7 @@ export class DeviceService {
   }
 
   updateDevice(device: Device) : Observable<any> {
-    return  this.http.put(this.devicePath, device);
+    return this.http.put(this.devicePath, device);
   }
 
   getAll(): Observable<Device[]> {
