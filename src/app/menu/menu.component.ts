@@ -28,6 +28,9 @@ import { Component } from '@angular/core';
           <li class="nav-item">
             <a class="p-3 fs-3 nav-link" routerLinkActive="active" routerLink="/option">Options</a>
           </li>
+          <li class="nav-item">
+            <a class="p-3 fs-3 nav-link" routerLinkActive="active" routerLink="/reservation">Réservations</a>
+          </li>
         </ul>
       </div>
     </div>

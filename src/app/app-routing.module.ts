@@ -13,6 +13,9 @@ import { clientResolver } from "./resolver/client.resolver";
 import { deviceResolver } from "./resolver/device.resolver";
 import { formulaResolver } from "./resolver/formula.resolver";
 import { optionResolver } from "./resolver/option.resolver";
+import { ReservationComponent } from "./reservation/reservation.component";
+import { ReservationNewComponent } from "./reservation/reservation-new/reservation-new.component";
+import { reservationResolver } from "./resolver/reservation.resolver";
 
 const routes: Routes = [
   {
@@ -77,6 +80,21 @@ const routes: Routes = [
     component: OptionNewComponent,
     resolve: {
       option: optionResolver
+    }
+  },
+  {
+    path: 'reservation',
+    component: ReservationComponent
+  },
+  {
+    path: 'reservation/new',
+    component: ReservationNewComponent
+  },
+  {
+    path: 'reservation/:idReservation',
+    component: ReservationNewComponent,
+    resolve: {
+      reservation: reservationResolver
     }
   }
 ];

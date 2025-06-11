@@ -23,6 +23,10 @@ import { OptionComponent } from "./option/option.component";
 import { OptionNewComponent } from "./option/option-new/option-new.component";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationNewComponent } from './reservation/reservation-new/reservation-new.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     FormulaNewComponent,
     OptionComponent,
     OptionNewComponent,
+    ReservationComponent,
+    ReservationNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     HttpClientModule,
     MatSelectModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
