@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ClientComponent } from './client/client.component';
 import { ClientNewComponent } from "./client/client-new/client-new.component";
 import { HomeComponent } from "./home/home.component";
@@ -16,100 +15,108 @@ import { optionResolver } from "./resolver/option.resolver";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ReservationNewComponent } from "./reservation/reservation-new/reservation-new.component";
 import { reservationResolver } from "./resolver/reservation.resolver";
-import { CalendarComponent } from "./calendar/calendar.component";
 import { statResolver } from "./resolver/stat.resolver";
+import { AuthGuard } from "./guards/auth-guard";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     resolve: {
       stat: statResolver
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'client',
-    component: ClientComponent
+    component: ClientComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'client/new',
-    component: ClientNewComponent
+    component: ClientNewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'client/:idClient',
     component: ClientNewComponent,
+    canActivate: [AuthGuard],
     resolve: {
       client: clientResolver
     }
   },
   {
     path: 'device',
-    component: DeviceComponent
+    component: DeviceComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'device/new',
-    component: DeviceNewComponent
+    component: DeviceNewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'device/:idDevice',
     component: DeviceNewComponent,
     resolve: {
       device: deviceResolver
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'formula',
-    component: FormulaComponent
+    component: FormulaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'formula/new',
-    component: FormulaNewComponent
+    component: FormulaNewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'formula/:idFormula',
     component: FormulaNewComponent,
     resolve: {
       formula: formulaResolver,
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'option',
-    component: OptionComponent
+    component: OptionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'option/new',
-    component: OptionNewComponent
+    component: OptionNewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'option/:idOption',
     component: OptionNewComponent,
     resolve: {
       option: optionResolver
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'reservation',
-    component: ReservationComponent
+    component: ReservationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reservation/new',
-    component: ReservationNewComponent
+    component: ReservationNewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reservation/:idReservation',
     component: ReservationNewComponent,
     resolve: {
       reservation: reservationResolver
-    }
-  },
-  {
-    path: 'calendar',
-    component: CalendarComponent
+    },
+    canActivate: [AuthGuard]
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
 export class AppRoutingModule { }

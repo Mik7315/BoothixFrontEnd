@@ -1,16 +1,34 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ClientService } from "../../services/client.service";
 import { Client } from "../../model/client";
 import { Address } from "../../model/address";
 import { ClientTypeEnum } from "../../model/client-type-enum";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { NgForOf, NgIf } from "@angular/common";
+import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-client-new',
+  standalone: true,
   templateUrl: './client-new.component.html',
-  styleUrls: ['./client-new.component.scss']
+  styleUrls: ['./client-new.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgForOf,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    NgIf,
+    MatSnackBarModule,
+  ]
 })
 export class ClientNewComponent implements OnInit {
   private clientService = inject(ClientService);

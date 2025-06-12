@@ -2,11 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from "../services/reservation.service";
 import { Reservation } from "../model/reservation";
 import { ReservationStatusEnum } from "../model/reservation-status-enum";
+import { MatIconModule } from "@angular/material/icon";
+import { DatePipe, NgClass, NgForOf, NgIf, NgStyle } from "@angular/common";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-calendar',
+  standalone: true,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
+  imports: [
+    MatIconModule,
+    DatePipe,
+    RouterLink,
+    MatTooltipModule,
+    NgStyle,
+    NgClass,
+    NgForOf,
+    NgIf,
+    MatButtonModule,
+    RouterLinkActive
+  ]
 })
 export class CalendarComponent implements OnInit {
   weeks: (Date | null)[][] = [];

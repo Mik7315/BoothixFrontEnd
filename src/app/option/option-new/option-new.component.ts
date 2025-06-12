@@ -1,14 +1,25 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {OptionService} from "../../services/option.service";
-import {FormBuilder, FormControl} from "@angular/forms";
-import {Option} from "../../model/option";
+import { Component, inject, OnInit } from '@angular/core';
+import { OptionService } from "../../services/option.service";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
+import { Option } from "../../model/option";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-option-new',
+  standalone: true,
   templateUrl: './option-new.component.html',
-  styleUrls: ['./option-new.component.scss']
+  styleUrls: ['./option-new.component.scss'],
+  imports: [
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+  ]
 })
 export class OptionNewComponent implements OnInit{
   private optionService = inject(OptionService);

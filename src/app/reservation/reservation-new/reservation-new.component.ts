@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReservationService } from "../../services/reservation.service";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { ClientService } from "../../services/client.service";
 import { OptionService } from "../../services/option.service";
 import { FormulaService } from "../../services/formula.service";
@@ -14,11 +14,27 @@ import { ReservationStatusEnum } from "../../model/reservation-status-enum";
 import { Address } from "../../model/address";
 import * as moment from 'moment';
 import { forkJoin } from "rxjs";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { NgForOf, NgIf } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-reservation-new',
+  standalone: true,
   templateUrl: './reservation-new.component.html',
-  styleUrls: ['./reservation-new.component.scss']
+  styleUrls: ['./reservation-new.component.scss'],
+  imports: [
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    NgIf,
+    NgForOf,
+    MatButtonModule,
+    MatSnackBarModule,
+  ]
 })
 export class ReservationNewComponent implements OnInit {
   private reservationService = inject(ReservationService);

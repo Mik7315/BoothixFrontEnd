@@ -1,16 +1,32 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { FormulaService } from "../../services/formula.service";
 import { Formula } from "../../model/formula";
 import { DeviceService } from "../../services/device.service";
 import { Device } from "../../model/device";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { NgForOf, NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-formula-new',
+  standalone: true,
   templateUrl: './formula-new.component.html',
-  styleUrls: ['./formula-new.component.scss']
+  styleUrls: ['./formula-new.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgForOf,
+    NgIf,
+    MatSnackBarModule,
+  ]
 })
 export class FormulaNewComponent implements OnInit {
   private formulaService = inject(FormulaService);

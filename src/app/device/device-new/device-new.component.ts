@@ -1,14 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { DeviceService } from "../../services/device.service";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Device } from "../../model/device";
 import { DeviceTypeEnum } from "../../model/device-type-enum";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { NgForOf } from "@angular/common";
 
 @Component({
   selector: 'app-device-new',
+  standalone: true,
   templateUrl: './device-new.component.html',
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    NgForOf,
+    MatSnackBarModule,
+  ],
   styleUrls: ['./device-new.component.scss']
 })
 export class DeviceNewComponent implements OnInit {
