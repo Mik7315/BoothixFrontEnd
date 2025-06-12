@@ -1,0 +1,28 @@
+<div class="calendar-header">
+  <button mat-icon-button (click)="previousMonth()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <h2>{{ currentDate | date: 'MMMM yyyy' }}</h2>
+  <button mat-icon-button (click)="nextMonth()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+
+<div class="calendar-grid">
+  <div class="calendar-weekday" *ngFor="let day of ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']">
+    {{ day }}
+  </div>
+
+  <ng-container *ngFor="let week of weeks">
+    <div class="calendar-day" *ngFor="let day of week">
+      <div *ngIf="day" class="date-number">{{ day.getDate() }}</div>
+
+      <div class="reservation-dot"
+           *ngFor="let reservation of getReservationsForDate(day!)"
+           [ngStyle]="{ 'background-color': getColor(reservation.status) }"
+           [matTooltip]="reservation.client?.firstName + ' ' + reservation.client?.lastName + ' - ' + reservation.status"
+           routerLinkActive="active" [routerLink]="['/reservation', reservation.idReservation]">
+      </div>
+    </div>
+  </ng-container>
+</div>

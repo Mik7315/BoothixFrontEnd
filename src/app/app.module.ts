@@ -27,6 +27,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationNewComponent } from './reservation/reservation-new/reservation-new.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { CalendarComponent } from "./calendar/calendar.component";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     OptionNewComponent,
     ReservationComponent,
     ReservationNewComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatMenuModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

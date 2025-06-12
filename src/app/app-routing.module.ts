@@ -16,6 +16,7 @@ import { optionResolver } from "./resolver/option.resolver";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ReservationNewComponent } from "./reservation/reservation-new/reservation-new.component";
 import { reservationResolver } from "./resolver/reservation.resolver";
+import { CalendarComponent } from "./calendar/calendar.component";
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
     resolve: {
       reservation: reservationResolver
     }
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent
   }
 ];
 
