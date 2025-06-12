@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="p-3 text-center">
+      <h1>Dashboard</h1>
+    </div>
+  </div>
+
+  <div class="row pb-5">
+    <div class="col-4">
+      <app-stat [title]="stat?.totalClientTitle" [content]="stat?.totalClient"></app-stat>
+    </div>
+
+    <div class="col-4">
+      <app-stat [title]="stat?.totalReservationTitle" [content]="stat?.totalReservation"></app-stat>
+    </div>
+
+    <div class="col-4">
+      <app-stat [title]="stat?.totalRevenusTitle" [content]="stat?.totalRevenus" [extra]="stat?.totalRevenusExtra"></app-stat>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-calendar></app-calendar>
+  </div>
+</div>

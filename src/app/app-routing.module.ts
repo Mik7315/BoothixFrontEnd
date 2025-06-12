@@ -17,11 +17,15 @@ import { ReservationComponent } from "./reservation/reservation.component";
 import { ReservationNewComponent } from "./reservation/reservation-new/reservation-new.component";
 import { reservationResolver } from "./resolver/reservation.resolver";
 import { CalendarComponent } from "./calendar/calendar.component";
+import { statResolver } from "./resolver/stat.resolver";
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    resolve: {
+      stat: statResolver
+    }
   },
   {
     path: 'client',

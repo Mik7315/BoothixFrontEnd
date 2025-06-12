@@ -26,6 +26,12 @@
   background-color: #fafafa;
 }
 
+.calendar-day-null {
+  min-height: 70px;
+  padding: 4px;
+  position: relative;
+}
+
 .date-number {
   font-size: 1em;
   color: #555;

@@ -14,7 +14,8 @@
   </div>
 
   <ng-container *ngFor="let week of weeks">
-    <div class="calendar-day" *ngFor="let day of week">
+    <div [ngClass]="!!day ? 'calendar-day' : 'calendar-day-null'" *ngFor="let day of week">
+<!--    <div class="calendar-day" *ngFor="let day of week">-->
       <div *ngIf="day" class="date-number">{{ day.getDate() }}</div>
 
       <div class="reservation-dot"

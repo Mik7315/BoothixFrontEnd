@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
   template: `
   <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded">
     <div class="container-fluid">
-      <a class="d-none d-md-block navbar-brand p-3" href="#">
+      <a class="d-none d-md-block navbar-brand p-3" routerLink="/">
         <img src="assets/boothix.png" alt="Boothix logo" height="30" />
       </a>
-      <a class="d-md-none navbar-brand p-3" href="#">
+      <a class="d-md-none navbar-brand p-3" routerLink="/">
         <img src="assets/boothix-icon.png" alt="Boothix logo" height="30" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
