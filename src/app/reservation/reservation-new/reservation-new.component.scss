@@ -9,17 +9,3 @@
   flex-direction: column;
   gap: 1rem;
 }
-
-.full-width {
-  width: 100%;
-}
-
-.half-width {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .half-width {
-    width: 48%;
-  }
-}

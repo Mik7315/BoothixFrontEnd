@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class OptionComponent implements OnInit {
   private optionService = inject(OptionService);
-  displayedColumns: string[] = ['id', 'name', 'price', 'more'];
+  displayedColumns: string[] = ['name', 'price', 'more'];
   options: Option[] = [];
 
   ngOnInit() {

@@ -3,12 +3,12 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from "./app/app.component";
 import { provideAuth0 } from "@auth0/auth0-angular";
 import { provideServiceWorker } from "@angular/service-worker";
-import { importProvidersFrom, isDevMode } from "@angular/core";
+import { importProvidersFrom, isDevMode, LOCALE_ID } from "@angular/core";
 import { PreloadAllModules, provideRouter, withPreloading, withRouterConfig } from "@angular/router";
 import { routes } from './app/app-routing.module';
 import { provideHttpClient } from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { MatNativeDateModule } from "@angular/material/core";
+import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
 import { AuthGuard } from "./app/guards/auth-guard";
 
 bootstrapApplication(AppComponent, {
@@ -34,6 +34,10 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideAnimations(),
     importProvidersFrom(MatNativeDateModule),
-    AuthGuard
+    AuthGuard,
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: LOCALE_ID
+    }
   ]
 }).catch(err => console.log(err));

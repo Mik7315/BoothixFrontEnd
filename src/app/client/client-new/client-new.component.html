@@ -12,7 +12,7 @@
         </button>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Choisir un type</mat-label>
         <mat-select formControlName="type">
           <mat-option *ngFor="let typeOption of clientTypes" [value]="typeOption.value">
@@ -21,75 +21,75 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Prénom</mat-label>
         <input matInput formControlName="firstName" />
       </mat-form-field>
 
       <ng-container *ngIf="formGroup.value.type === clientTypes[1].value">
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline">
           <mat-label>Dénomination</mat-label>
           <input matInput formControlName="denomination" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline">
           <mat-label>Numéro de TVA</mat-label>
           <input matInput formControlName="vatNumber" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline">
           <mat-label>Numéro d'entreprise</mat-label>
           <input matInput formControlName="bceNumber" />
         </mat-form-field>
       </ng-container>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Téléphone</mat-label>
         <input matInput formControlName="phoneNumber" />
         <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
         <mat-icon matSuffix>mail</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Rue</mat-label>
         <input matInput formControlName="street" />
       </mat-form-field>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Numéro</mat-label>
           <input matInput formControlName="houseNumber" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Boîte</mat-label>
           <input matInput formControlName="box" />
         </mat-form-field>
       </div>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Code postal</mat-label>
           <input matInput formControlName="zipCode" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Ville</mat-label>
           <input matInput formControlName="city" />
         </mat-form-field>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Pays</mat-label>
         <input matInput formControlName="country" />
       </mat-form-field>

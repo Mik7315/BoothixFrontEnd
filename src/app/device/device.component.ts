@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class DeviceComponent implements OnInit {
   private deviceService= inject(DeviceService)
-  displayedColumns: string[] = ['id', 'name', 'type', 'more'];
+  displayedColumns: string[] = ['name', 'type', 'more'];
   devices: Device[] = [];
 
   ngOnInit() {

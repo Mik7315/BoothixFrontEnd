@@ -12,64 +12,64 @@
         </button>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Numéro de téléphone</mat-label>
         <input matInput formControlName="phoneNumber" />
         <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Rue</mat-label>
         <input matInput formControlName="street" />
       </mat-form-field>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Numéro</mat-label>
           <input matInput formControlName="houseNumber" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Boîte</mat-label>
           <input matInput formControlName="box" />
         </mat-form-field>
       </div>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Code postal</mat-label>
           <input matInput formControlName="zipCode" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Ville</mat-label>
           <input matInput formControlName="city" />
         </mat-form-field>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Pays</mat-label>
         <input matInput formControlName="country" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Statut</mat-label>
         <mat-select formControlName="status">
           <mat-option *ngFor="let status of reservationStatus" [value]="status.value">
             {{ status.viewValue }}
-          </mat-option>
+          </mat-option> 
         </mat-select>
       </mat-form-field>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date évènement</mat-label>
           <input matInput [matDatepicker]="eventDatePicker" formControlName="eventDate">
           <mat-datepicker-toggle matSuffix [for]="eventDatePicker"/>
           <mat-datepicker #eventDatePicker/>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Heure évènement</mat-label>
           <input matInput type="time" formControlName="eventTime">
           <mat-icon matSuffix>schedule</mat-icon>
@@ -77,14 +77,14 @@
       </div>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date installation</mat-label>
           <input matInput [matDatepicker]="installationDatePicker" formControlName="installationDate">
           <mat-datepicker-toggle matSuffix [for]="installationDatePicker"/>
           <mat-datepicker #installationDatePicker/>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Heure installation</mat-label>
           <input matInput type="time" formControlName="installationTime">
           <mat-icon matSuffix>schedule</mat-icon>
@@ -92,51 +92,51 @@
       </div>
 
       <div class="d-flex gap-2">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date reprise matériel</mat-label>
           <input matInput [matDatepicker]="pickUpDatePicker" formControlName="pickUpDate">
           <mat-datepicker-toggle matSuffix [for]="pickUpDatePicker"/>
           <mat-datepicker #pickUpDatePicker/>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="outline" class="w-100">
           <mat-label>Heure reprise matériel</mat-label>
           <input matInput type="time" formControlName="pickUpTime">
           <mat-icon matSuffix>schedule</mat-icon>
         </mat-form-field>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline">
         <mat-label>Coût de livraison</mat-label>
         <input matInput formControlName="deliveryCost" />
         <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Remise</mat-label>
         <input matInput formControlName="discount" />
         <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Prix total</mat-label>
         <input matInput formControlName="totalPrice" />
         <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Acompte</mat-label>
         <input matInput formControlName="deposit" />
         <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Commentaire</mat-label>
         <textarea matInput formControlName="comment" rows="4"></textarea>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Lien vers la galerie</mat-label>
         <input matInput formControlName="galleryLink" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Client</mat-label>
         <mat-select formControlName="client">
           <mat-option *ngFor="let client of clients" [value]="client">
@@ -145,7 +145,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Options</mat-label>
         <mat-select formControlName="options" multiple>
           <mat-option *ngFor="let option of options" [value]="option">
@@ -154,7 +154,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" >
         <mat-label>Formules</mat-label>
         <mat-select formControlName="formulas" multiple>
           <mat-option *ngFor="let formula of formulas" [value]="formula">
