@@ -1,29 +1,34 @@
-<div class="container">
-  <div class="row">
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1>Liste des clients existants</h1>
+  </div>
 
-    <div class="p-3 text-center">
-      <h1>Liste des clients existants</h1>
-    </div>
+  <div class="d-flex justify-content-end mb-3">
+    <button mat-raised-button color="primary" routerLink="/client/new">
+      <mat-icon>add</mat-icon>
+      Ajouter un client
+    </button>
+  </div>
 
-    <div class="add-button-container">
-      <button mat-raised-button  routerLink="/client/new">
-        <mat-icon>add</mat-icon> Ajouter un client
-      </button>
-    </div>
-
-    <table mat-table [dataSource]="clients">
+  <div class="card">
+    <table mat-table [dataSource]="clients" class="mat-elevation-z1 full-width">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let client"> {{client.idClient}} </td>
+        <td mat-cell *matCellDef="let client"> {{ client.idClient }} </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let client"> {{client.firstName}} {{client.lastName}} </td>
+        <td mat-cell *matCellDef="let client"> {{ client.firstName }} {{ client.lastName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef> Téléphone </th>
+        <td mat-cell *matCellDef="let client"> {{ client.phoneNumber }} </td>
       </ng-container>
 
       <ng-container matColumnDef="more">
-        <th mat-header-cell *matHeaderCellDef aria-label="row actions"></th>
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let client">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_horiz</mat-icon>

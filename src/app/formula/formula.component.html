@@ -1,17 +1,17 @@
-<div class="container">
-  <div class="row">
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1>Liste des formules existantes</h1>
+  </div>
 
-    <div class="p-3 text-center">
-      <h1>Liste des formules existantes</h1>
-    </div>
+  <div class="d-flex justify-content-end mb-3">
+    <button mat-raised-button color="primary" routerLink="/formula/new">
+      <mat-icon>add</mat-icon>
+      Ajouter une formule
+    </button>
+  </div>
 
-    <div class="add-button-container">
-      <button mat-raised-button  routerLink="/formula/new">
-        <mat-icon>add</mat-icon> Ajouter une formule
-      </button>
-    </div>
-
-    <table mat-table [dataSource]="formulas">
+  <div class="card">
+    <table mat-table [dataSource]="formulas" class="mat-elevation-z1 full-width">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let formula"> {{ formula.idFormula }} </td>
@@ -33,7 +33,7 @@
       </ng-container>
 
       <ng-container matColumnDef="more">
-        <th mat-header-cell *matHeaderCellDef aria-label="row actions"></th>
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let formula">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_horiz</mat-icon>

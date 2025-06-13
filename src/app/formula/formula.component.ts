@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class FormulaComponent implements OnInit{
   private formulaService = inject(FormulaService);
-  displayedColumns: string[] = ['id', 'name', 'price','more'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'device','more'];
   formulas: Formula[] = [];
 
   ngOnInit() {

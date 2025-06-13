@@ -25,7 +25,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class ClientComponent implements OnInit {
   private clientService = inject(ClientService);
-  displayedColumns: string[] = ['id', 'name', 'more'];
+  displayedColumns: string[] = ['id', 'name', 'phoneNumber', 'more'];
   clients: Client[] = [];
 
   ngOnInit() {

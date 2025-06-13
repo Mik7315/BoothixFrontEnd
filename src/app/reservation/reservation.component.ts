@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class ReservationComponent implements OnInit {
   private reservationService = inject(ReservationService);
-  displayedColumns: string[] = ['id', 'name', 'price', 'more'];
+  displayedColumns: string[] = ['id', 'name', 'client', 'price', 'more'];
   reservations: Reservation[] = [];
 
   ngOnInit() {
