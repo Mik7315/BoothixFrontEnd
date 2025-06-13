@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 })
 export class DeviceComponent implements OnInit {
   private deviceService= inject(DeviceService)
-  displayedColumns: string[] = ['id', 'name', 'more'];
+  displayedColumns: string[] = ['id', 'name', 'type', 'more'];
   devices: Device[] = [];
 
   ngOnInit() {
@@ -31,8 +31,8 @@ export class DeviceComponent implements OnInit {
   }
 
   getAllDevices() {
-    this.deviceService.getAll().subscribe(x => {
-      this.devices = x;
+    this.deviceService.getAll().subscribe(devices => {
+      this.devices = devices;
     })
   }
 

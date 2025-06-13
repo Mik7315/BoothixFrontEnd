@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ClientService } from "../../services/client.service";
 import { Client } from "../../model/client";
 import { Address } from "../../model/address";
 import { ClientTypeEnum } from "../../model/client-type-enum";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
@@ -28,6 +28,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatButtonModule,
     NgIf,
     MatSnackBarModule,
+    RouterLink,
   ]
 })
 export class ClientNewComponent implements OnInit {
@@ -45,25 +46,39 @@ export class ClientNewComponent implements OnInit {
   ];
 
   formGroup = this.formBuilder.group({
-    type: new FormControl(ClientTypeEnum.PRIVATE),
+    type: new FormControl(ClientTypeEnum.PRIVATE, Validators.required),
     lastName: new FormControl(''),
     firstName: new FormControl(''),
     denomination: new FormControl(''),
     vatNumber: new FormControl(''),
     bceNumber: new FormControl(''),
-    phoneNumber: new FormControl(''),
-    email: new FormControl(''),
-    street: new FormControl(''),
-    houseNumber: new FormControl(''),
+    phoneNumber: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    street: new FormControl('', Validators.required),
+    houseNumber: new FormControl('', Validators.required),
     box: new FormControl(''),
-    zipCode: new FormControl(''),
-    city: new FormControl(''),
-    country: new FormControl('')
+    zipCode: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required)
   });
 
   ngOnInit() {
     this.client = this.route.snapshot.data['client'];
 
+    this.initForm();
+
+    this.formGroup.get('type')?.valueChanges.subscribe(type => {
+      if (type === ClientTypeEnum.PRIVATE) {
+        this.formGroup.patchValue({
+          denomination: null,
+          vatNumber: null,
+          bceNumber: null,
+        });
+      }
+    })
+  }
+
+  initForm() {
     if (!!this.client) {
       this.formGroup.patchValue({
         type: this.client.type,
@@ -81,20 +96,21 @@ export class ClientNewComponent implements OnInit {
         city: this.client.address?.city,
         country: this.client.address?.country
       });
+    } else {
+      this.formGroup.reset();
     }
-
-    this.formGroup.get('type')?.valueChanges.subscribe(type => {
-      if (type === ClientTypeEnum.PRIVATE) {
-        this.formGroup.patchValue({
-          denomination: '',
-          vatNumber: '',
-          bceNumber: ''
-        });
-      }
-    })
   }
 
   save(){
+    if (this.formGroup.invalid) {
+      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+      return;
+    }
+
     const values = this.formGroup.value;
 
     let client = new Client({
@@ -144,5 +160,9 @@ export class ClientNewComponent implements OnInit {
           }
         });
     }
+  }
+
+  reset() {
+    this.initForm();
   }
 }

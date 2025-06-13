@@ -1,7 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="offset-4 col-4" [formGroup]="formGroup" >
-      <mat-form-field appearance="fill">
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1 *ngIf="!!client">Modifier le client</h1>
+    <h1 *ngIf="!client">Créer un nouveau client</h1>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <form class="form-card" [formGroup]="formGroup">
+      <div class="d-flex justify-content-between mb-3">
+        <button mat-icon-button routerLink="/client" aria-label="Retour">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Choisir un type</mat-label>
         <mat-select formControlName="type">
           <mat-option *ngFor="let typeOption of clientTypes" [value]="typeOption.value">
@@ -9,62 +20,89 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nom</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Prénom</mat-label>
         <input matInput formControlName="firstName" />
       </mat-form-field>
+
       <ng-container *ngIf="formGroup.value.type === clientTypes[1].value">
-        <mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Dénomination</mat-label>
           <input matInput formControlName="denomination" />
         </mat-form-field>
-        <mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Numéro de TVA</mat-label>
           <input matInput formControlName="vatNumber" />
         </mat-form-field>
-        <mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Numéro d'entreprise</mat-label>
           <input matInput formControlName="bceNumber" />
         </mat-form-field>
       </ng-container>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Téléphone</mat-label>
         <input matInput formControlName="phoneNumber" />
         <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
+        <mat-icon matSuffix>mail</mat-icon>
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Rue</mat-label>
         <input matInput formControlName="street" />
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Numéro</mat-label>
-        <input matInput formControlName="houseNumber" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Boite</mat-label>
-        <input matInput formControlName="box" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Code postal</mat-label>
-        <input matInput formControlName="zipCode" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Ville</mat-label>
-        <input matInput formControlName="city" />
-      </mat-form-field>
-      <mat-form-field>
+
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Numéro</mat-label>
+          <input matInput formControlName="houseNumber" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Boîte</mat-label>
+          <input matInput formControlName="box" />
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Code postal</mat-label>
+          <input matInput formControlName="zipCode" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Ville</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Pays</mat-label>
         <input matInput formControlName="country" />
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">{{ !!client ? 'Mettre à jour' : 'Enregistrer' }}</button>
-    </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <button mat-icon-button color="primary"(click)="reset()">
+          <mat-icon>replay</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="save()">
+          <mat-icon>save</mat-icon>
+          {{ !!client ? 'Mettre à jour' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -1,15 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { DeviceService } from "../../services/device.service";
-import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Device } from "../../model/device";
 import { DeviceTypeEnum } from "../../model/device-type-enum";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
-import { NgForOf } from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-device-new',
@@ -23,6 +24,9 @@ import { NgForOf } from "@angular/common";
     MatButtonModule,
     NgForOf,
     MatSnackBarModule,
+    RouterLink,
+    MatIconModule,
+    NgIf
   ],
   styleUrls: ['./device-new.component.scss']
 })
@@ -45,24 +49,38 @@ export class DeviceNewComponent implements OnInit {
   ]
 
   formGroup = this.formBuilder.group({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    type: new FormControl(DeviceTypeEnum.PHOTOBOOTH)
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    type: new FormControl(DeviceTypeEnum.PHOTOBOOTH, Validators.required)
   });
 
   ngOnInit() {
     this.device = this.route.snapshot.data['device'];
 
+    this.initForm();
+  }
+
+  initForm() {
     if (!!this.device) {
       this.formGroup.patchValue({
         name: this.device.name,
         description: this.device.description,
         type: this.device.type
       });
+    } else {
+      this.formGroup.reset();
     }
   }
 
   save(){
+    if (this.formGroup.invalid) {
+      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+      return;
+    }
     const values = this.formGroup.value;
 
     let device = new Device({
@@ -99,5 +117,9 @@ export class DeviceNewComponent implements OnInit {
         }
       });
     }
+  }
+
+  reset() {
+    this.initForm();
   }
 }

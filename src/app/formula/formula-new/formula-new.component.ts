@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FormulaService } from "../../services/formula.service";
 import { Formula } from "../../model/formula";
 import { DeviceService } from "../../services/device.service";
 import { Device } from "../../model/device";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSelectModule } from "@angular/material/select";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { NgForOf, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-formula-new',
@@ -26,6 +27,8 @@ import { NgForOf, NgIf } from "@angular/common";
     NgForOf,
     NgIf,
     MatSnackBarModule,
+    MatIconModule,
+    RouterLink,
   ]
 })
 export class FormulaNewComponent implements OnInit {
@@ -40,10 +43,10 @@ export class FormulaNewComponent implements OnInit {
   devices: Device[] = [];
 
   formGroup = this.formBuilder.group({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    price: new FormControl<Number | null>(null),
-    device: new FormControl<Device | undefined>(undefined)
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    price: new FormControl<Number | null>(null, Validators.required),
+    device: new FormControl<Device | undefined>(undefined, Validators.required)
   });
 
   ngOnInit() {
@@ -51,18 +54,32 @@ export class FormulaNewComponent implements OnInit {
 
     this.deviceService.getAll().subscribe(x => {
       this.devices = x;
-      if (!!this.formula) {
-        this.formGroup.patchValue({
-          name: this.formula.name,
-          description: this.formula.description,
-          price: this.formula.price,
-          device: this.devices.find(d => d.idDevice === this.formula?.device?.idDevice)
-        })
-      }
+      this.initForm();
     });
   }
 
+  initForm() {
+    if (!!this.formula) {
+      this.formGroup.patchValue({
+        name: this.formula.name,
+        description: this.formula.description,
+        price: this.formula.price,
+        device: this.devices.find(d => d.idDevice === this.formula?.device?.idDevice)
+      })
+    } else {
+      this.formGroup.reset();
+    }
+  }
+
   save(){
+    if (this.formGroup.invalid) {
+      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+      return;
+    }
     const values = this.formGroup.value;
 
     let formula = new Formula({
@@ -100,5 +117,9 @@ export class FormulaNewComponent implements OnInit {
         }
       });
     }
+  }
+
+  reset() {
+    this.initForm();
   }
 }

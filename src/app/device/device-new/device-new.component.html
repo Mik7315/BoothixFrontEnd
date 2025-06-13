@@ -1,15 +1,28 @@
-<div class="container">
-  <div class="row">
-    <div class="offset-4 col-4" [formGroup]="formGroup" >
-      <mat-form-field>
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1 *ngIf="!!device">Modification d'un appareil</h1>
+    <h1 *ngIf="!device">Création d'un nouvel appareil</h1>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <form class="form-card" [formGroup]="formGroup">
+      <div class="d-flex justify-content-between mb-3">
+        <button mat-icon-button routerLink="/device" aria-label="Retour">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nom</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Description</mat-label>
-        <input matInput formControlName="description" />
+        <textarea matInput formControlName="description" rows="5"></textarea>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Choisir un type</mat-label>
         <mat-select formControlName="type">
           <mat-option *ngFor="let typeOption of deviceTypes" [value]="typeOption.value">
@@ -17,7 +30,17 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">{{ !!device ? 'Mettre à jour' : 'Enregistrer' }}</button>
-    </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <button mat-icon-button color="primary" (click)="reset()">
+          <mat-icon>replay</mat-icon>
+        </button>
+
+        <button mat-raised-button color="primary" (click)="save()">
+          <mat-icon>save</mat-icon>
+          {{ !!device ? 'Mettre à jour' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

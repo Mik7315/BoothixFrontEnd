@@ -1,112 +1,143 @@
-<div class="container">
-  <div class="row">
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1 *ngIf="!!reservation">Réservation {{ reservation.idReservation }}</h1>
+    <h1 *ngIf="!reservation">Création d'une nouvelle réservation</h1>
+  </div>
 
-    <div class="p-3 text-center">
-      <h1 *ngIf="!!reservation">Réservation {{ reservation.idReservation }}</h1>
-      <h1 *ngIf="!reservation">Création d'une nouvelle réservation</h1>
-    </div>
+  <div class="d-flex justify-content-center">
+    <form class="form-card" [formGroup]="formGroup">
+      <div class="d-flex justify-content-between mb-3">
+        <button mat-icon-button routerLink="/reservation" aria-label="Retour">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
 
-    <div class="offset-4 col-4" [formGroup]="formGroup" >
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Numéro de téléphone</mat-label>
         <input matInput formControlName="phoneNumber" />
+        <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Rue</mat-label>
         <input matInput formControlName="street" />
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Numéro</mat-label>
-        <input matInput formControlName="houseNumber" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Boite</mat-label>
-        <input matInput formControlName="box" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Code postal</mat-label>
-        <input matInput formControlName="zipCode" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Ville</mat-label>
-        <input matInput formControlName="city" />
-      </mat-form-field>
-      <mat-form-field>
+
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Numéro</mat-label>
+          <input matInput formControlName="houseNumber" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Boîte</mat-label>
+          <input matInput formControlName="box" />
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Code postal</mat-label>
+          <input matInput formControlName="zipCode" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Ville</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Pays</mat-label>
         <input matInput formControlName="country" />
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Choisir un status</mat-label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Statut</mat-label>
         <mat-select formControlName="status">
-          <mat-option *ngFor="let statusReservation of reservationStatus" [value]="statusReservation.value">
-            {{ statusReservation.viewValue }}
+          <mat-option *ngFor="let status of reservationStatus" [value]="status.value">
+            {{ status.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Date évènement</mat-label>
-        <input matInput [matDatepicker]="eventDatePicker" formControlName="eventDate">
-        <mat-datepicker #eventDatePicker/>
-        <mat-datepicker-toggle [for]="eventDatePicker" matSuffix/>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Heure évènement</mat-label>
-        <input matInput type="time" formControlName="eventTime">
-      </mat-form-field>
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Date évènement</mat-label>
+          <input matInput [matDatepicker]="eventDatePicker" formControlName="eventDate">
+          <mat-datepicker-toggle matSuffix [for]="eventDatePicker"/>
+          <mat-datepicker #eventDatePicker/>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Date installation</mat-label>
-        <input matInput [matDatepicker]="installationDatePicker" formControlName="installationDate">
-        <mat-datepicker #installationDatePicker/>
-        <mat-datepicker-toggle [for]="installationDatePicker" matSuffix/>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Heure installation</mat-label>
-        <input matInput type="time" formControlName="installationTime">
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Heure évènement</mat-label>
+          <input matInput type="time" formControlName="eventTime">
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Date reprise matériel</mat-label>
-        <input matInput [matDatepicker]="pickUpDatePicker" formControlName="pickUpDate">
-        <mat-datepicker #pickUpDatePicker/>
-        <mat-datepicker-toggle [for]="pickUpDatePicker" matSuffix/>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Heure reprise matériel</mat-label>
-        <input matInput type="time" formControlName="pickUpTime">
-      </mat-form-field>
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Date installation</mat-label>
+          <input matInput [matDatepicker]="installationDatePicker" formControlName="installationDate">
+          <mat-datepicker-toggle matSuffix [for]="installationDatePicker"/>
+          <mat-datepicker #installationDatePicker/>
+        </mat-form-field>
 
-      <mat-form-field>
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Heure installation</mat-label>
+          <input matInput type="time" formControlName="installationTime">
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex gap-2">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Date reprise matériel</mat-label>
+          <input matInput [matDatepicker]="pickUpDatePicker" formControlName="pickUpDate">
+          <mat-datepicker-toggle matSuffix [for]="pickUpDatePicker"/>
+          <mat-datepicker #pickUpDatePicker/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Heure reprise matériel</mat-label>
+          <input matInput type="time" formControlName="pickUpTime">
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Coût de livraison</mat-label>
         <input matInput formControlName="deliveryCost" />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Remise</mat-label>
         <input matInput formControlName="discount" />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Prix total</mat-label>
         <input matInput formControlName="totalPrice" />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Acompte</mat-label>
         <input matInput formControlName="deposit" />
+        <mat-icon matSuffix>euro_symbol</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Commentaire</mat-label>
-        <input matInput formControlName="comment" />
+        <textarea matInput formControlName="comment" rows="4"></textarea>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Lien vers la gallerie</mat-label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Lien vers la galerie</mat-label>
         <input matInput formControlName="galleryLink" />
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Choisir un client</mat-label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Client</mat-label>
         <mat-select formControlName="client">
           <mat-option *ngFor="let client of clients" [value]="client">
             {{ client.lastName }} {{ client.firstName }}
@@ -114,8 +145,8 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Choisir des options</mat-label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Options</mat-label>
         <mat-select formControlName="options" multiple>
           <mat-option *ngFor="let option of options" [value]="option">
             {{ option.name }}
@@ -123,15 +154,25 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Choisir des formules</mat-label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Formules</mat-label>
         <mat-select formControlName="formulas" multiple>
           <mat-option *ngFor="let formula of formulas" [value]="formula">
-            {{ formula.name }}
+            {{ formula.device?.name }} - {{ formula.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="save()">{{ !!reservation ? 'Mettre à jour' : 'Enregistrer' }}</button>
-    </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <button mat-icon-button color="primary" (click)="reset()">
+          <mat-icon>replay</mat-icon>
+        </button>
+
+        <button mat-raised-button color="primary" (click)="save()">
+          <mat-icon>save</mat-icon>
+          {{ !!reservation ? 'Mettre à jour' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

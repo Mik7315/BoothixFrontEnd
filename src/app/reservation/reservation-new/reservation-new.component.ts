@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ReservationService } from "../../services/reservation.service";
-import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { ClientService } from "../../services/client.service";
 import { OptionService } from "../../services/option.service";
@@ -19,6 +19,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { NgForOf, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-reservation-new',
@@ -34,6 +35,8 @@ import { MatButtonModule } from "@angular/material/button";
     NgForOf,
     MatButtonModule,
     MatSnackBarModule,
+    MatIconModule,
+    RouterLink,
   ]
 })
 export class ReservationNewComponent implements OnInit {
@@ -70,12 +73,12 @@ export class ReservationNewComponent implements OnInit {
     selectedDateEvent: new FormControl(''),
 
     // Dates et heures : stockées séparément, puis combinées
-    eventDate: new FormControl(''),
-    eventTime: new FormControl('12:00'),
+    eventDate: new FormControl('', Validators.required),
+    eventTime: new FormControl('', Validators.required),
     installationDate: new FormControl(''),
-    installationTime: new FormControl('12:00'),
+    installationTime: new FormControl(''),
     pickUpDate: new FormControl(''),
-    pickUpTime: new FormControl('12:00'),
+    pickUpTime: new FormControl(''),
 
     deliveryCost: new FormControl<number | null>(null),
     discount: new FormControl<number | null>(null),
@@ -84,7 +87,7 @@ export class ReservationNewComponent implements OnInit {
     comment: new FormControl(''),
     galleryLink: new FormControl(''),
 
-    client: new FormControl<Client | undefined>(undefined),
+    client: new FormControl<Client | undefined>(undefined, Validators.required),
     options: new FormControl<Option[] | undefined>(undefined),
     formulas: new FormControl<Formula[] | undefined>(undefined)
   })
@@ -101,37 +104,51 @@ export class ReservationNewComponent implements OnInit {
       this.options = data[1];
       this.clients = data[2];
 
-      if (!!this.reservation) {
-        this.formGroup.patchValue({
-          phoneNumber: this.reservation.phoneNumber,
-          street: this.reservation.address?.street,
-          houseNumber: this.reservation.address?.houseNumber,
-          box: this.reservation.address?.box,
-          zipCode: this.reservation.address?.zipCode,
-          city: this.reservation.address?.city,
-          country: this.reservation.address?.country,
-          status: this.reservation.status,
-          eventDate: this.reservation.eventDate,
-          eventTime: this.reservation.eventTime,
-          installationDate: this.reservation.installationDate,
-          installationTime: this.reservation.installationTime,
-          pickUpDate: this.reservation.pickUpDate,
-          pickUpTime: this.reservation.pickUpTime,
-          deliveryCost: this.reservation.deliveryCost,
-          discount: this.reservation.discount,
-          totalPrice: this.reservation.totalPrice,
-          deposit: this.reservation.deposit,
-          comment: this.reservation.comment,
-          galleryLink: this.reservation.galleryLink,
-          client: this.clients.find(client => client.idClient === this.reservation?.client?.idClient),
-          options: this.options.filter(option => !!this.reservation?.options?.find(o => o.idOption === option.idOption)),
-          formulas: this.formulas.filter(formula => !!this.reservation?.formulas?.find(f => f.idFormula === formula.idFormula))
-        });
-      }
+      this.initForm();
     });
   }
 
+  initForm() {
+    if (!!this.reservation) {
+      this.formGroup.patchValue({
+        phoneNumber: this.reservation.phoneNumber,
+        street: this.reservation.address?.street,
+        houseNumber: this.reservation.address?.houseNumber,
+        box: this.reservation.address?.box,
+        zipCode: this.reservation.address?.zipCode,
+        city: this.reservation.address?.city,
+        country: this.reservation.address?.country,
+        status: this.reservation.status,
+        eventDate: this.reservation.eventDate,
+        eventTime: this.reservation.eventTime,
+        installationDate: this.reservation.installationDate,
+        installationTime: this.reservation.installationTime,
+        pickUpDate: this.reservation.pickUpDate,
+        pickUpTime: this.reservation.pickUpTime,
+        deliveryCost: this.reservation.deliveryCost,
+        discount: this.reservation.discount,
+        totalPrice: this.reservation.totalPrice,
+        deposit: this.reservation.deposit,
+        comment: this.reservation.comment,
+        galleryLink: this.reservation.galleryLink,
+        client: this.clients.find(client => client.idClient === this.reservation?.client?.idClient),
+        options: this.options.filter(option => !!this.reservation?.options?.find(o => o.idOption === option.idOption)),
+        formulas: this.formulas.filter(formula => !!this.reservation?.formulas?.find(f => f.idFormula === formula.idFormula))
+      });
+    } else {
+      this.formGroup.reset();
+    }
+  }
+
   save() {
+    if (this.formGroup.invalid) {
+      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+      return;
+    }
     const values = this.formGroup.value;
 
     let reservation = new Reservation({
@@ -191,5 +208,9 @@ export class ReservationNewComponent implements OnInit {
         }
       });
     }
+  }
+
+  reset() {
+    this.initForm();
   }
 }
