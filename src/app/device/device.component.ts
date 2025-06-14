@@ -6,6 +6,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-device',
@@ -17,12 +18,15 @@ import { MatButtonModule } from "@angular/material/button";
     MatMenuModule,
     RouterLink,
     RouterLinkActive,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   styleUrls: ['./device.component.scss']
 })
 export class DeviceComponent implements OnInit {
   private deviceService= inject(DeviceService)
+  private snackBar = inject(MatSnackBar);
+
   displayedColumns: string[] = ['name', 'type', 'more'];
   devices: Device[] = [];
 
@@ -37,7 +41,19 @@ export class DeviceComponent implements OnInit {
   }
 
   deleteDevice(deviceToDelete: Device) {
-    console.log(deviceToDelete);
-    //Modifier un champ en DB en supprimer
+    if (!!deviceToDelete?.idDevice) {
+      this.deviceService.deleteById(deviceToDelete.idDevice!).subscribe({
+        next: value => {
+          this.getAllDevices();
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
 }

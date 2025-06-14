@@ -20,6 +20,10 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { NgForOf, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { ReservationClose } from "../../model/reservation-close";
+import { ReservationCloseDialogComponent } from "../../reservation-close-dialog/reservation-close-dialog.component";
+import { ReservationCancelDialogComponent } from "../../reservation-cancel-dialog/reservation-cancel-dialog.component";
 
 @Component({
   selector: 'app-reservation-new',
@@ -37,6 +41,7 @@ import { MatIconModule } from "@angular/material/icon";
     MatSnackBarModule,
     MatIconModule,
     RouterLink,
+    MatDialogModule
   ]
 })
 export class ReservationNewComponent implements OnInit {
@@ -48,6 +53,7 @@ export class ReservationNewComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   reservation?: Reservation;
   clients: Client[] = [];
@@ -138,6 +144,10 @@ export class ReservationNewComponent implements OnInit {
     } else {
       this.formGroup.reset();
     }
+
+    if (this.reservation?.status === ReservationStatusEnum.CLOSED || this.reservation?.status === ReservationStatusEnum.CANCELLED) {
+      this.formGroup.disable();
+    }
   }
 
   save() {
@@ -213,4 +223,52 @@ export class ReservationNewComponent implements OnInit {
   reset() {
     this.initForm();
   }
+
+  close() {
+    this.dialog.open(ReservationCloseDialogComponent, {
+      width: '500px',
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        let reservationClose = new ReservationClose({
+          idReservation: this.reservation?.idReservation,
+          galleryLink: value,
+        });
+        this.reservationService.close(reservationClose).subscribe({
+          next: value => {
+            this.router.navigate(['reservation']);
+          },
+          error: err => {
+            this.snackBar.open('Une erreur s\'est produite', 'OK', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 3000
+            });
+          }
+        })
+      }
+    });
+  }
+
+  cancel() {
+    this.dialog.open(ReservationCancelDialogComponent, {
+      width: '500px',
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.reservationService.cancel(this.reservation?.idReservation!).subscribe({
+          next: value => {
+            this.router.navigate(['reservation']);
+          },
+          error: err => {
+            this.snackBar.open('Une erreur s\'est produite', 'OK', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 3000
+            });
+          }
+        })
+      }
+    });
+  }
+
+  protected readonly ReservationStatusEnum = ReservationStatusEnum;
 }

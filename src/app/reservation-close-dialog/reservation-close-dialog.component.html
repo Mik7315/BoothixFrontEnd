@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Clôturer la réservation</h2>
+<mat-dialog-content [formGroup]="formGroup">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Lien vers la gallerie</mat-label>
+    <input matInput formControlName="url" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" mat-dialog-close (click)="cancel()">Annuler</button>
+  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial (click)="confirm()">Clôturer</button>
+</mat-dialog-actions>

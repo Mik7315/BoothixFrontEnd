@@ -6,6 +6,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-formula',
@@ -18,11 +19,14 @@ import { MatButtonModule } from "@angular/material/button";
     MatMenuModule,
     RouterLink,
     RouterLinkActive,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class FormulaComponent implements OnInit{
   private formulaService = inject(FormulaService);
+  private snackBar = inject(MatSnackBar);
+
   displayedColumns: string[] = ['name', 'price', 'device','more'];
   formulas: Formula[] = [];
 
@@ -31,13 +35,25 @@ export class FormulaComponent implements OnInit{
   }
 
   getAllFormulas() {
-    this.formulaService.getAll().subscribe(x => {
-      this.formulas = x;
+    this.formulaService.getAll().subscribe(formulas => {
+      this.formulas = formulas;
     });
   }
 
   deleteFormula(formulaToDelete: Formula) {
-    console.log(formulaToDelete);
-    //Modifier un champ en DB en supprimer
+    if (!!formulaToDelete?.idFormula) {
+      this.formulaService.deleteById(formulaToDelete.idFormula!).subscribe({
+        next: value => {
+          this.getAllFormulas();
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
 }

@@ -84,8 +84,8 @@ export class MenuComponent {
   }
 
   collapseNavbar() {
-    const navbar = this.navbarCollapse.nativeElement;
-    if (navbar.classList.contains('show')) {
+    const navbar = this.navbarCollapse?.nativeElement;
+    if (navbar?.classList.contains('show')) {
       navbar.classList.remove('show');
     }
   }

@@ -7,6 +7,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatCommonModule } from "@angular/material/core";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-client',
@@ -20,11 +21,14 @@ import { MatButtonModule } from "@angular/material/button";
     MatMenuModule,
     RouterLink,
     MatButtonModule,
-    RouterLinkActive
+    RouterLinkActive,
+    MatSnackBarModule
   ]
 })
 export class ClientComponent implements OnInit {
   private clientService = inject(ClientService);
+  private snackBar = inject(MatSnackBar);
+
   displayedColumns: string[] = ['name', 'phoneNumber', 'more'];
   clients: Client[] = [];
 
@@ -39,7 +43,19 @@ export class ClientComponent implements OnInit {
   }
 
   deleteClient(clientToDelete: Client) {
-    console.log(clientToDelete);
-    //Modifier un champ en DB en supprimer
+    if (!!clientToDelete?.idClient) {
+      this.clientService.deleteById(clientToDelete.idClient!).subscribe({
+        next: value => {
+          this.getAllClients();
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
 }

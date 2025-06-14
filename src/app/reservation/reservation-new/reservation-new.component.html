@@ -55,9 +55,16 @@
       <mat-form-field appearance="outline">
         <mat-label>Statut</mat-label>
         <mat-select formControlName="status">
-          <mat-option *ngFor="let status of reservationStatus" [value]="status.value">
-            {{ status.viewValue }}
-          </mat-option> 
+          <ng-container *ngFor="let status of reservationStatus">
+            <mat-option *ngIf="
+              status.value === 'OPTION'
+              || status.value === 'BOOKED'
+              || (status.value === 'CANCELLED' && reservation?.status === 'CANCELLED')
+              || (status.value === 'CLOSED' && reservation?.status === 'CLOSED')" [value]="status.value"
+            >
+              {{ status.viewValue }}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
 
@@ -168,10 +175,19 @@
           <mat-icon>replay</mat-icon>
         </button>
 
-        <button mat-raised-button color="primary" (click)="save()">
+        <button mat-raised-button color="primary" *ngIf="!reservation?.status || reservation?.status === ReservationStatusEnum.OPTION || reservation?.status === ReservationStatusEnum.BOOKED" (click)="save()">
           <mat-icon>save</mat-icon>
           {{ !!reservation ? 'Mettre à jour' : 'Enregistrer' }}
         </button>
+
+        <ng-container *ngIf="reservation?.status === ReservationStatusEnum.OPTION || reservation?.status === ReservationStatusEnum.BOOKED">
+          <button mat-raised-button color="primary" (click)="close()" class="ms-2 me-2">
+            Clôturer
+          </button>
+          <button mat-raised-button color="primary" (click)="cancel()">
+            Annuler
+          </button>
+        </ng-container>
       </div>
     </form>
   </div>

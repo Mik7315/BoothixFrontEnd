@@ -29,4 +29,8 @@ export class OptionService {
   getById(id: Number) : Observable<any> {
     return this.http.get(`${this.optionPath}/${id}`);
   }
+
+  deleteById(id: Number): Observable<any> {
+    return this.http.delete(`${this.optionPath}/${id}`);
+  }
 }

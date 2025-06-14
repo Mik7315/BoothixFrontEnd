@@ -28,4 +28,8 @@ export class FormulaService {
   getById(id: Number) : Observable<Formula> {
     return this.http.get(`${this.formulaPath}/${id}`);
   }
+
+  deleteById(id: Number): Observable<any> {
+    return this.http.delete(`${this.formulaPath}/${id}`);
+  }
 }

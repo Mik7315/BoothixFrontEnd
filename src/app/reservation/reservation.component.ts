@@ -6,6 +6,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTableModule } from "@angular/material/table";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-reservation',
@@ -19,11 +20,14 @@ import { MatButtonModule } from "@angular/material/button";
     RouterLink,
     RouterLinkActive,
     MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class ReservationComponent implements OnInit {
   private reservationService = inject(ReservationService);
-  displayedColumns: string[] = ['name', 'client', 'price', 'more'];
+  private snackBar = inject(MatSnackBar);
+
+  displayedColumns: string[] = ['name', 'client', 'price', 'status', 'more'];
   reservations: Reservation[] = [];
 
   ngOnInit() {
@@ -37,8 +41,20 @@ export class ReservationComponent implements OnInit {
   }
 
   deleteReservation(reservationToDelete: Reservation) {
-    console.log(reservationToDelete);
-    //Modifier un champ en DB en supprimer
+    if (!!reservationToDelete?.idReservation) {
+      this.reservationService.deleteById(reservationToDelete.idReservation!).subscribe({
+        next: value => {
+          this.getAllReservations();
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
 
 }

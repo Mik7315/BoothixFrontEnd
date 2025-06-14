@@ -6,6 +6,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-option',
@@ -18,11 +19,14 @@ import { MatButtonModule } from "@angular/material/button";
     MatMenuModule,
     RouterLink,
     MatButtonModule,
-    RouterLinkActive
+    RouterLinkActive,
+    MatSnackBarModule
   ]
 })
 export class OptionComponent implements OnInit {
   private optionService = inject(OptionService);
+  private snackBar = inject(MatSnackBar);
+
   displayedColumns: string[] = ['name', 'price', 'more'];
   options: Option[] = [];
 
@@ -37,7 +41,19 @@ export class OptionComponent implements OnInit {
   }
 
   deleteOption(optionToDelete: Option) {
-    console.log(optionToDelete);
-    //Modifier un champ en DB en supprimer
+    if (!!optionToDelete?.idOption) {
+      this.optionService.deleteById(optionToDelete.idOption!).subscribe({
+        next: value => {
+          this.getAllOptions();
+        },
+        error: err => {
+          this.snackBar.open('Une erreur s\'est produite', 'OK', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+        }
+      })
+    }
   }
 }

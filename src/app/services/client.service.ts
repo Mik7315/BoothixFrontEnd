@@ -28,4 +28,8 @@ export class ClientService {
   getById(id: Number) : Observable<Client> {
     return this.http.get(`${this.clientPath}/${id}`);
   }
+
+  deleteById(id: Number): Observable<any> {
+    return this.http.delete(`${this.clientPath}/${id}`);
+  }
 }

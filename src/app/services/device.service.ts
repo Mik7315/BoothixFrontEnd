@@ -28,4 +28,8 @@ export class DeviceService {
   getById(id: Number) : Observable<Device> {
     return this.http.get(`${this.devicePath}/${id}`);
   }
+
+  deleteById(id: Number): Observable<any> {
+    return this.http.delete(`${this.devicePath}/${id}`);
+  }
 }
