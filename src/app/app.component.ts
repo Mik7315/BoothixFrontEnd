@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MenuComponent } from "./menu/menu.component";
 import { RouterOutlet } from "@angular/router";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,11 @@ import { RouterOutlet } from "@angular/router";
   imports: [
     MenuComponent,
     RouterOutlet,
+    AsyncPipe,
+    NgIf,
   ],
   template: `
-    <div class="app-container">
+    <div class="app-container" *ngIf="authService.isAuthenticated$ | async as isAuth">
       <div class="header">
         <app-menu class="w-100"></app-menu>
       </div>
@@ -43,17 +47,16 @@ import { RouterOutlet } from "@angular/router";
       overflow: auto;
       padding: 1rem;
     }
-  `],
-  // providers: [
-  //   provideAuth0({
-  //     domain: 'dev-gqsvyp352yztcuds.eu.auth0.com',
-  //     clientId: 'e1Kd1fLJVCvhiDbzQhnrDzRSkWM6czQw',
-  //     authorizationParams: {
-  //       redirect_uri: window.location.origin
-  //     }
-  //   })
-  // ]
+  `]
 })
 export class AppComponent {
+  authService = inject(AuthService);
 
+  constructor() {
+    this.authService.isAuthenticated$.subscribe(x => {
+      if(!x) {
+        this.authService.loginWithRedirect();
+      }
+    })
+  }
 }
