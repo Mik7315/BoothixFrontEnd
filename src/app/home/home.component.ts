@@ -22,5 +22,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.stat = this.route.snapshot.data['stat'];
   }
-
 }

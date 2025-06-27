@@ -24,8 +24,7 @@ export const routes: Routes = [
     component: HomeComponent,
     resolve: {
       stat: statResolver
-    },
-    canActivate: [AuthGuard]
+    }
   },
   {
     path: 'client',

@@ -50,8 +50,8 @@ export class ClientNewComponent implements OnInit {
     lastName: new FormControl(''),
     firstName: new FormControl(''),
     denomination: new FormControl(''),
-    vatNumber: new FormControl(''),
-    bceNumber: new FormControl(''),
+    vatNumber: new FormControl('', Validators.pattern(/^\d{10}$/)),
+    bceNumber: new FormControl('', Validators.pattern(/^[A-Za-z]{2}\d{10}$/)),
     phoneNumber: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     street: new FormControl('', Validators.required),
@@ -103,7 +103,7 @@ export class ClientNewComponent implements OnInit {
 
   save(){
     if (this.formGroup.invalid) {
-      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+      this.snackBar.open('Veuillez vérifier les champs en rouge', 'OK', {
         horizontalPosition: 'end',
         verticalPosition: 'top',
         duration: 3000

@@ -86,10 +86,10 @@ export class ReservationNewComponent implements OnInit {
     pickUpDate: new FormControl(''),
     pickUpTime: new FormControl(''),
 
-    deliveryCost: new FormControl<number | null>(null),
-    discount: new FormControl<number | null>(null),
-    totalPrice: new FormControl<number | null>(null),
-    deposit: new FormControl<number | null>(null),
+    deliveryCost: new FormControl<number | null>(null, Validators.pattern(/^\d+(\.\d{1,2})?$/)),
+    discount: new FormControl<number | null>(null, Validators.pattern(/^\d+(\.\d{1,2})?$/)),
+    totalPrice: new FormControl<number | null>(null, Validators.pattern(/^\d+(\.\d{1,2})?$/)),
+    deposit: new FormControl<number | null>(null, Validators.pattern(/^\d+(\.\d{1,2})?$/)),
     comment: new FormControl(''),
     galleryLink: new FormControl(''),
 
@@ -152,7 +152,7 @@ export class ReservationNewComponent implements OnInit {
 
   save() {
     if (this.formGroup.invalid) {
-      this.snackBar.open('Veuillez remplir les champs obligatoire', 'OK', {
+      this.snackBar.open('Veuillez vérifier les champs en rouge', 'OK', {
         horizontalPosition: 'end',
         verticalPosition: 'top',
         duration: 3000
